@@ -2,7 +2,7 @@
 本仓库存放各应用的隐私政策页面，自动更新列表如下：
 
 <!-- AUTO-GENERATED-LIST:START -->
-<!-- 这里会自动生成应用列表，请勿手动修改 -->
+- [Rungo](rungo-privacy.html)
 <!-- AUTO-GENERATED-LIST:END -->
 
 ## 说明
