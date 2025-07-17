@@ -5,11 +5,10 @@ on:
     paths:
       - '*.html'
       - '.github/workflows/generate-readme.yml'
-      - 'generate_readme.py'
+      - 'generate_readme.py'  # 监控脚本文件变化
 
-# 添加这部分：赋予写入代码的权限
 permissions:
-  contents: write  # 允许推送代码到仓库
+  contents: write  # 确保有推送权限
 
 jobs:
   generate:
@@ -17,21 +16,20 @@ jobs:
     steps:
       - name: 拉取代码
         uses: actions/checkout@v4
-        # 注意：如果是私有仓库，可能需要添加 persist-credentials: true
         with:
-          persist-credentials: true  # 保留凭据，确保后续推送有权限
+          persist-credentials: true  # 保留凭据
 
       - name: 安装 Python
         uses: actions/setup-python@v5
         with:
           python-version: '3.x'
 
+      # 关键步骤：执行脚本，路径必须正确
       - name: 运行脚本生成 README
-        run: python generate_readme.py
+        run: python generate_readme.py  # 若在根目录，直接用这个命令
 
       - name: 提交更新后的 README
         uses: stefanzweifel/git-auto-commit-action@v5
         with:
           commit_message: "自动更新隐私政策列表"
           file_pattern: "README.md"
-          # 无需额外配置 token，默认使用 GITHUB_TOKEN
