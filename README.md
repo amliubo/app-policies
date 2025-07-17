@@ -1,2 +1,2 @@
 # privacy-policies
-隐私政策集合
+隐私政策
