@@ -1,35 +1,30 @@
-name: 自动生成隐私政策列表
+# .github/workflows/generate-readme.yml
+name: 自动生成协议列表
 on:
   push:
     branches: [ main ]
     paths:
       - '*.html'
-      - '.github/workflows/generate-readme.yml'
-      - 'generate_readme.py'  # 监控脚本文件变化
+      - 'generate_readme.py'
 
 permissions:
-  contents: write  # 确保有推送权限
+  contents: write
 
 jobs:
   generate:
     runs-on: ubuntu-latest
     steps:
-      - name: 拉取代码
-        uses: actions/checkout@v4
-        with:
-          persist-credentials: true  # 保留凭据
+      - uses: actions/checkout@v4
 
       - name: 安装 Python
         uses: actions/setup-python@v5
         with:
           python-version: '3.x'
 
-      # 关键步骤：执行脚本，路径必须正确
-      - name: 运行脚本生成 README
-        run: python generate_readme.py  # 若在根目录，直接用这个命令
+      - name: 运行脚本
+        run: python generate_readme.py
 
-      - name: 提交更新后的 README
+      - name: 自动提交
         uses: stefanzweifel/git-auto-commit-action@v5
         with:
-          commit_message: "自动更新隐私政策列表"
-          file_pattern: "README.md"
+          commit_message: "自动更新协议列表"
