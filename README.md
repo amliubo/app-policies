@@ -3,7 +3,7 @@
 本仓库存放各应用的隐私政策和用户协议页面，自动更新列表如下：
 
 <!-- AUTO-GENERATED-LIST:START -->
-（此处内容由脚本自动生成）
+- **Rung**: [隐私协议](RunG-privacy.html) ｜ [用户协议](RunG-user-agreement.html)
 <!-- AUTO-GENERATED-LIST:END -->
 
 ## 说明
