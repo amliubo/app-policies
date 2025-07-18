@@ -56,37 +56,117 @@ def update_readme(auto_text):
 
 def generate_index(policies):
     html = """<!DOCTYPE html>
-        <html lang="zh">
-        <head>
-        <meta charset="UTF-8">
-        <title>隐私与用户协议合集</title>
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <style>
-            body { font-family: sans-serif; padding: 40px; max-width: 700px; margin: auto; line-height: 1.6; }
-            h1 { color: #007AFF; }
-            ul { padding-left: 1em; }
-            a { text-decoration: none; color: #007AFF; }
-            li { margin-bottom: 1em; }
-        </style>
-        </head>
-        <body>
-        <h1>应用隐私协议 / 用户协议列表</h1>
-        <ul>
-        """
+<html lang="zh">
+<head>
+  <meta charset="UTF-8">
+  <title>RunGo 协议合集</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <style>
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+      background-color: #f7f7f8;
+      color: #333;
+      font-size: 15px;
+      line-height: 1.6;
+    }
+
+    .container {
+      max-width: 720px;
+      margin: 40px auto;
+      background: #fff;
+      padding: 32px 24px;
+      border-radius: 12px;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+    }
+
+    h1 {
+      font-size: 22px;
+      color: #222;
+      margin-bottom: 24px;
+      text-align: center;
+    }
+
+    .app-entry {
+      margin-bottom: 20px;
+      padding: 16px 20px;
+      background: #fafafa;
+      border: 1px solid #eee;
+      border-radius: 10px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+    }
+
+    .app-name {
+      font-weight: 600;
+      font-size: 16px;
+      margin-bottom: 8px;
+    }
+
+    .links a {
+      margin-right: 16px;
+      color: #007aff;
+      text-decoration: none;
+      font-size: 14px;
+    }
+
+    .links a:last-child {
+      margin-right: 0;
+    }
+
+    .footer {
+      text-align: center;
+      margin-top: 40px;
+      font-size: 13px;
+      color: #888;
+    }
+
+    @media (max-width: 500px) {
+      .app-entry {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+      .links {
+        margin-top: 6px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>应用隐私与用户协议合集</h1>
+"""
+
     for app, items in policies.items():
-        html += f'    <li><strong>{app}</strong>: '
-        html += f'<a href="{items["privacy"]}">隐私协议</a> ｜ ' if "privacy" in items else "无隐私协议 ｜ "
-        html += f'<a href="{items["user-agreement"]}">用户协议</a>' if "user-agreement" in items else "无用户协议"
-        html += "</li>\n"
+        html += '    <div class="app-entry">\n'
+        html += f'      <div class="app-name">{app}</div>\n'
+        html += '      <div class="links">\n'
+        if "privacy" in items:
+            html += f'        <a href="{items["privacy"]}">隐私政策</a>\n'
+        else:
+            html += f'        <span style="color:#aaa;">无隐私政策</span>\n'
+        if "user-agreement" in items:
+            html += f'        <a href="{items["user-agreement"]}">用户协议</a>\n'
+        else:
+            html += f'        <span style="color:#aaa;">无用户协议</span>\n'
+        html += '      </div>\n'
+        html += '    </div>\n'
 
-    html += """  </ul>
-  <p style="margin-top: 2em; font-size: 0.9em; color: gray;">本页面自动生成，用于展示各应用协议文件。</p>
+    html += """
+    <div class="footer">
+      本页面由脚本自动生成！
+    </div>
+  </div>
 </body>
-</html>"""
-
+</html>
+"""
     with open(INDEX_PATH, "w", encoding="utf-8") as f:
         f.write(html)
     print("✅ index.html 已生成")
+
 
 if __name__ == "__main__":
     policies = find_policies()
