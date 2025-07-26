@@ -17,7 +17,7 @@ def find_policies():
         if not file.endswith(".html") or file.startswith("index"):
             continue
 
-        match = re.match(r"(.+?)-(privacy|user-agreement)\.html$", file)
+        match = re.match(r"(.+?)-(privacy|user-agreement|support)\.html$", file)
         if match:
             app_key, policy_type = match.groups()
             app_name = app_key.replace("-", " ").title()
@@ -32,7 +32,8 @@ def generate_readme(policies):
     for app, items in policies.items():
         privacy = f"[隐私协议]({items['privacy']})" if "privacy" in items else "*无隐私协议*"
         user_agreement = f"[用户协议]({items['user-agreement']})" if "user-agreement" in items else "*无用户协议*"
-        lines.append(f"- **{app}**: {privacy} ｜ {user_agreement}")
+        support = f"[技术支持]({items['support']})" if "support" in items else "*无技术支持*"
+        lines.append(f"- **{app}**: {privacy} ｜ {user_agreement} ｜ {support}")
     return "\n".join(lines)
 
 def update_readme(auto_text):
@@ -152,6 +153,10 @@ def generate_index(policies):
             html += f'        <a href="{items["user-agreement"]}">用户协议</a>\n'
         else:
             html += f'        <span style="color:#aaa;">无用户协议</span>\n'
+        if "support" in items:
+            html += f'        <a href="{items["support"]}">技术支持</a>\n'
+        else:
+            html += f'        <span style="color:#aaa;">无技术支持</span>\n'
         html += '      </div>\n'
         html += '    </div>\n'
 
