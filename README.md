@@ -3,7 +3,7 @@
 本仓库存放各应用的隐私政策和用户协议页面，自动更新列表如下：
 
 <!-- AUTO-GENERATED-LIST:START -->
-- **Rung**: [隐私协议](RunG-privacy.html) ｜ [用户协议](RunG-user-agreement.html) ｜ [技术支持](RunG-support.html)
+- **Rung**: 隐私协议: [de](RunG-privacy.de.html) / [en](RunG-privacy.en.html) / [ja](RunG-privacy.ja.html) / [ko](RunG-privacy.ko.html) ｜ 用户协议: [de](RunG-user-agreement.de.html) / [en](RunG-user-agreement.en.html) / [ja](RunG-user-agreement.ja.html) / [ko](RunG-user-agreement.ko.html) ｜ 技术支持: [de](RunG-support.de.html) / [en](RunG-support.en.html) / [ja](RunG-support.ja.html) / [ko](RunG-support.ko.html)
 <!-- AUTO-GENERATED-LIST:END -->
 
 ## 说明
