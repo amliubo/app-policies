@@ -17,7 +17,7 @@ def find_policies():
         if not file.endswith(".html") or file.startswith("index"):
             continue
 
-        match = re.match(r"(.+?)-(privacy|user-agreement|support)\.(\w+)\.html$", file)
+        match = re.match(r"(.+?)-(privacy|user-agreement|support)\.([a-zA-Z\-]+)\.html$", file)
         if match:
             app_key, policy_type, lang = match.groups()
             app_name = app_key.replace("-", " ").title()
