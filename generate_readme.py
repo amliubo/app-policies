@@ -1,6 +1,6 @@
 import os
 import re
-from pathlib import Path
+from collections import defaultdict
 
 README_PATH = "README.md"
 INDEX_PATH = "index.html"
@@ -10,30 +10,41 @@ START_MARKER = "<!-- AUTO-GENERATED-LIST:START -->"
 END_MARKER = "<!-- AUTO-GENERATED-LIST:END -->"
 
 def find_policies():
-    """扫描所有 HTML 文件并整理出应用名及其协议链接"""
-    policies = {}
+    """扫描所有 HTML 文件，构建多语言协议结构"""
+    policies = defaultdict(lambda: defaultdict(dict))  # app -> policy_type -> lang -> filename
 
     for file in os.listdir(HTML_DIR):
         if not file.endswith(".html") or file.startswith("index"):
             continue
 
-        match = re.match(r"(.+?)-(privacy|user-agreement|support)\.html$", file)
+        match = re.match(r"(.+?)-(privacy|user-agreement|support)\.(\w+)\.html$", file)
         if match:
-            app_key, policy_type = match.groups()
+            app_key, policy_type, lang = match.groups()
             app_name = app_key.replace("-", " ").title()
-            if app_name not in policies:
-                policies[app_name] = {}
-            policies[app_name][policy_type] = file
+            policies[app_name][policy_type][lang] = file
 
     return dict(sorted(policies.items()))
 
 def generate_readme(policies):
+    """生成 README 中的简要列表内容"""
     lines = []
     for app, items in policies.items():
-        privacy = f"[隐私协议]({items['privacy']})" if "privacy" in items else "*无隐私协议*"
-        user_agreement = f"[用户协议]({items['user-agreement']})" if "user-agreement" in items else "*无用户协议*"
-        support = f"[技术支持]({items['support']})" if "support" in items else "*无技术支持*"
-        lines.append(f"- **{app}**: {privacy} ｜ {user_agreement} ｜ {support}")
+        parts = []
+        for policy_type in ["privacy", "user-agreement", "support"]:
+            if policy_type in items:
+                langs = " / ".join(
+                    f"[{lang}]({items[policy_type][lang]})"
+                    for lang in sorted(items[policy_type])
+                )
+                name = {
+                    "privacy": "隐私协议",
+                    "user-agreement": "用户协议",
+                    "support": "技术支持"
+                }[policy_type]
+                parts.append(f"{name}: {langs}")
+            else:
+                parts.append(f"*无{policy_type}*")
+        lines.append(f"- **{app}**: {' ｜ '.join(parts)}")
     return "\n".join(lines)
 
 def update_readme(auto_text):
@@ -56,6 +67,7 @@ def update_readme(auto_text):
     print("✅ README.md 已更新")
 
 def generate_index(policies):
+    """生成 index.html，展示所有协议多语言链接"""
     html = """<!DOCTYPE html>
 <html lang="zh">
 <head>
@@ -95,10 +107,6 @@ def generate_index(policies):
       background: #fafafa;
       border: 1px solid #eee;
       border-radius: 10px;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      flex-wrap: wrap;
     }
 
     .app-name {
@@ -107,15 +115,24 @@ def generate_index(policies):
       margin-bottom: 8px;
     }
 
-    .links a {
-      margin-right: 16px;
-      color: #007aff;
-      text-decoration: none;
-      font-size: 14px;
+    .links {
+      margin-left: 10px;
     }
 
-    .links a:last-child {
-      margin-right: 0;
+    .policy-type {
+      margin-bottom: 6px;
+    }
+
+    .policy-type span {
+      font-weight: 500;
+      margin-right: 6px;
+    }
+
+    .policy-type a {
+      margin-right: 10px;
+      font-size: 14px;
+      color: #007aff;
+      text-decoration: none;
     }
 
     .footer {
@@ -123,16 +140,6 @@ def generate_index(policies):
       margin-top: 40px;
       font-size: 13px;
       color: #888;
-    }
-
-    @media (max-width: 500px) {
-      .app-entry {
-        flex-direction: column;
-        align-items: flex-start;
-      }
-      .links {
-        margin-top: 6px;
-      }
     }
   </style>
 </head>
@@ -142,23 +149,24 @@ def generate_index(policies):
 """
 
     for app, items in policies.items():
-        html += '    <div class="app-entry">\n'
+        html += f'    <div class="app-entry">\n'
         html += f'      <div class="app-name">{app}</div>\n'
-        html += '      <div class="links">\n'
-        if "privacy" in items:
-            html += f'        <a href="{items["privacy"]}">隐私政策</a>\n'
-        else:
-            html += f'        <span style="color:#aaa;">无隐私政策</span>\n'
-        if "user-agreement" in items:
-            html += f'        <a href="{items["user-agreement"]}">用户协议</a>\n'
-        else:
-            html += f'        <span style="color:#aaa;">无用户协议</span>\n'
-        if "support" in items:
-            html += f'        <a href="{items["support"]}">技术支持</a>\n'
-        else:
-            html += f'        <span style="color:#aaa;">无技术支持</span>\n'
-        html += '      </div>\n'
-        html += '    </div>\n'
+        for policy_type in ["privacy", "user-agreement", "support"]:
+            html += f'      <div class="policy-type">\n'
+            label = {
+                "privacy": "隐私政策",
+                "user-agreement": "用户协议",
+                "support": "技术支持"
+            }[policy_type]
+            html += f'        <span>{label}:</span>\n'
+            if policy_type in items:
+                for lang in sorted(items[policy_type]):
+                    filename = items[policy_type][lang]
+                    html += f'        <a href="{filename}">{lang}</a>\n'
+            else:
+                html += f'        <span style="color:#aaa;">无</span>\n'
+            html += f'      </div>\n'
+        html += f'    </div>\n'
 
     html += """
     <div class="footer">
@@ -171,7 +179,6 @@ def generate_index(policies):
     with open(INDEX_PATH, "w", encoding="utf-8") as f:
         f.write(html)
     print("✅ index.html 已生成")
-
 
 if __name__ == "__main__":
     policies = find_policies()
