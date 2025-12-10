@@ -22,90 +22,96 @@
       h1 {
         font-size: 26px;
         font-weight: 700;
-        color: #000;
         margin-bottom: 20px;
-        text-align: left;
       }
       h2 {
         font-size: 18px;
         font-weight: 700;
-        color: #000;
         margin-top: 28px;
         margin-bottom: 12px;
       }
       p,
       li {
         margin: 8px 0;
-        color: #222;
       }
       ul {
         padding-left: 20px;
       }
       a {
         color: #007aff;
-        text-decoration: none;
       }
       .note {
         font-size: 13px;
         color: #666;
         margin-bottom: 20px;
-        text-align: left;
       }
       .footer {
         margin-top: 48px;
         font-size: 13px;
         color: #666;
-        text-align: left;
         border-top: 1px solid #eee;
         padding-top: 16px;
       }
       .warn {
         font-size: 13px;
         color: #a00;
-        margin-top: 16px;
-        font-style: italic;
+        margin-top: 12px;
       }
     </style>
   </head>
+
   <body>
     <div class="container">
       <h1>假期星球 技术支持</h1>
-      <p class="note">最后更新：2025 年 8 月 11 日</p>
+      <p class="note">最后更新：2025 年 12 月 10 日</p>
 
       <p>
-        欢迎使用假期星球！如果您在使用过程中遇到问题，请参考以下常见问题，或通过邮箱联系我们。
+        感谢使用假期星球。若遇到使用问题，请先参考下列常见问题与解决办法，或将问题与设备信息一并反馈给我们。
       </p>
 
-      <h2>常见问题</h2>
+      <h2>常见问题与解决办法</h2>
       <ul>
         <li>
-          <strong>假期信息未更新：</strong>
-          请确保设备联网状态良好，应用会自动从开源接口获取最新数据。
+          <strong>应用界面图片缺失：</strong>
+          请确认您安装的应用包为完整版本；若使用自建打包或调试版本，请检查
+          `assets` 是否包含对应图片资源并已在构建时正确打包。
         </li>
         <li>
-          <strong>倒计时显示异常：</strong> 尝试重启应用，确保系统时间设置正确。
+          <strong>倒计时显示异常：</strong>
+          请确认设备系统时间与时区设置正确；若问题仍存在，尝试重启应用或更新至最新版。
         </li>
         <li>
-          <strong>随机请假理由功能无效：</strong>
-          请检查网络连接，功能依赖在线接口。
+          <strong>页面布局或文字溢出：</strong>
+          在某些设备或系统字体缩放下可能出现，请尝试将系统字体缩放设置为默认或更新应用以获得修复版本。
         </li>
         <li>
-          <strong>应用闪退或无法启动：</strong> 建议卸载后重新安装最新版应用。
+          <strong>应用闪退或无法启动：</strong>
+          建议先卸载旧版并从官方渠道重新安装最新版本；如仍异常，请将崩溃日志与重现步骤一并发送给我们。
         </li>
       </ul>
 
       <p class="warn">
-        ※ 请假理由仅供参考，请根据实际情况合理使用，避免造成不必要的误会或问题。
+        ※ 应用为本地展示类工具，当前版本不存在网络数据上传或账号同步功能。
       </p>
 
-      <h2>联系邮箱</h2>
-      <p>如需反馈问题或获取技术支持，请发送邮件至：</p>
+      <h2>如何提交问题（建议格式）</h2>
+      <p>为加快处理速度，请在邮件中包含：</p>
+      <ul>
+        <li>问题描述与重现步骤</li>
+        <li>设备型号（例如：iPhone 12）</li>
+        <li>系统版本（例如：iOS 15.4）</li>
+        <li>应用版本号（可在应用关于页或安装包中查看）</li>
+        <li>如果可能，请附上屏幕截图或崩溃日志</li>
+      </ul>
+
+      <h2>反馈方式</h2>
+      <p>请将问题发送至：</p>
       <p><a href="mailto:lobfun@outlook.com">lobfun@outlook.com</a></p>
 
-      <h2>兼容版本</h2>
-      <p>假期星球 当前支持 iOS 15 及以上系统版本。</p>
+      <h2>系统支持</h2>
+      <p>当前版本官方支持 iOS 15 及以上系统。</p>
 
-      <div class="footer">© 2025 假期星球 · 技术支持页面</div>
+      <div class="footer">© 2025 假期星球</div>
     </div>
   </body>
 </html>
