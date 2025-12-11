@@ -8,108 +8,114 @@
       body {
         font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
           Arial, sans-serif;
-        background-color: #fff;
         margin: 0;
-        padding: 24px 16px;
+        padding: 0;
+        background: #f7f7f9;
         color: #222;
         font-size: 15px;
-        line-height: 1.6;
+        line-height: 1.65;
       }
-      .container {
-        max-width: 720px;
+
+      .page {
+        max-width: 760px;
         margin: 0 auto;
+        padding: 28px 18px 48px;
+        background: #fff;
+        border-radius: 20px;
+        box-shadow: 0 4px 24px rgba(0, 0, 0, 0.04);
       }
+
       h1 {
-        font-size: 26px;
+        font-size: 24px;
         font-weight: 700;
-        margin-bottom: 20px;
+        margin-bottom: 16px;
       }
+
       h2 {
-        font-size: 18px;
+        font-size: 17px;
         font-weight: 700;
         margin-top: 28px;
-        margin-bottom: 12px;
+        margin-bottom: 10px;
       }
+
       p,
       li {
         margin: 8px 0;
       }
+
       ul {
-        padding-left: 20px;
+        padding-left: 18px;
       }
+
       a {
         color: #007aff;
+        text-decoration: none;
       }
+
       .note {
         font-size: 13px;
         color: #666;
-        margin-bottom: 20px;
+        margin-bottom: 16px;
       }
+
       .footer {
-        margin-top: 48px;
+        margin-top: 40px;
+        padding-top: 16px;
         font-size: 13px;
         color: #666;
         border-top: 1px solid #eee;
-        padding-top: 16px;
       }
+
       .warn {
         font-size: 13px;
-        color: #a00;
-        margin-top: 12px;
+        color: #c33;
+        margin-top: 10px;
       }
     </style>
   </head>
 
   <body>
-    <div class="container">
+    <div class="page">
       <h1>假期星球 技术支持</h1>
       <p class="note">最后更新：2025 年 12 月 10 日</p>
 
       <p>
-        感谢使用假期星球。若遇到使用问题，请先参考下列常见问题与解决办法，或将问题与设备信息一并反馈给我们。
+        感谢使用假期星球。若遇到问题，请先参考以下常见情况，或将详情反馈给我们。
       </p>
 
-      <h2>常见问题与解决办法</h2>
+      <h2>常见问题</h2>
       <ul>
+        <li><strong>图片缺失：</strong>请确认 assets 资源已包含且构建正确。</li>
         <li>
-          <strong>应用界面图片缺失：</strong>
-          请确认您安装的应用包为完整版本；若使用自建打包或调试版本，请检查
-          `assets` 是否包含对应图片资源并已在构建时正确打包。
+          <strong>倒计时异常：</strong>检查系统日期与时区；必要时重启应用。
         </li>
         <li>
-          <strong>倒计时显示异常：</strong>
-          请确认设备系统时间与时区设置正确；若问题仍存在，尝试重启应用或更新至最新版。
+          <strong>文字或布局溢出：</strong
+          >可能与系统字体大小相关，可尝试调整为默认。
         </li>
-        <li>
-          <strong>页面布局或文字溢出：</strong>
-          在某些设备或系统字体缩放下可能出现，请尝试将系统字体缩放设置为默认或更新应用以获得修复版本。
-        </li>
-        <li>
-          <strong>应用闪退或无法启动：</strong>
-          建议先卸载旧版并从官方渠道重新安装最新版本；如仍异常，请将崩溃日志与重现步骤一并发送给我们。
-        </li>
+        <li><strong>闪退或无法启动：</strong>建议卸载后重新安装最新版本。</li>
       </ul>
 
-      <p class="warn">
-        ※ 应用为本地展示类工具，当前版本不存在网络数据上传或账号同步功能。
-      </p>
+      <p class="warn">※ 当前版本不包含网络同步或数据上传功能。</p>
 
-      <h2>如何提交问题（建议格式）</h2>
-      <p>为加快处理速度，请在邮件中包含：</p>
+      <h2>反馈内容建议</h2>
       <ul>
-        <li>问题描述与重现步骤</li>
-        <li>设备型号（例如：iPhone 12）</li>
-        <li>系统版本（例如：iOS 15.4）</li>
-        <li>应用版本号（可在应用关于页或安装包中查看）</li>
-        <li>如果可能，请附上屏幕截图或崩溃日志</li>
+        <li>问题描述与复现步骤</li>
+        <li>设备型号（如 iPhone 12）</li>
+        <li>系统版本（如 iOS 15.4）</li>
+        <li>应用版本号</li>
+        <li>截图或崩溃日志（如有）</li>
       </ul>
 
       <h2>反馈方式</h2>
-      <p>请将问题发送至：</p>
-      <p><a href="mailto:lobfun@outlook.com">lobfun@outlook.com</a></p>
+      <p>
+        请将问题发送至：<a href="mailto:lobfun@outlook.com"
+          >lobfun@outlook.com</a
+        >
+      </p>
 
       <h2>系统支持</h2>
-      <p>当前版本官方支持 iOS 15 及以上系统。</p>
+      <p>当前版本支持 iOS 15 及以上。</p>
 
       <div class="footer">© 2025 假期星球</div>
     </div>
